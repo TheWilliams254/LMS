@@ -67,7 +67,7 @@ function Login() {
       </form>
 
       <p className="redirect-text">
-       Don't have an account? <Link to="/register">Register</Link>
+        Don't have an account? <a href="/register">Register</a>
       </p>
     </div>
   );
