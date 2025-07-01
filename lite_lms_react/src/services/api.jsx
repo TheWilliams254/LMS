@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000', // change to your backend
+  baseURL: 'https://lite-lms-7dkg.onrender.com', // change to your backend
 });
 
 api.interceptors.request.use((req) => {
