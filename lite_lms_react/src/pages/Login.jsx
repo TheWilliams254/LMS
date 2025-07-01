@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import api from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
@@ -9,42 +8,39 @@ function Login() {
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const response = await fetch('https://lite-lms-7dkg.onrender.com/login', {
-      email,
-      password,
-    });
+    try {
+      const response = await fetch('https://lite-lms-7dkg.onrender.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    // Check if response contains access_token
-    if (response.status === 200 && response.data.access_token) {
-      const { access_token, id, name, role } = response.data;
+      const data = await response.json();
 
-      localStorage.setItem('token', response.data.access_token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      if (response.ok && data.access_token) {
+        // Save token and user to localStorage
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('user', JSON.stringify(data.user));
 
-
-      // Navigate to dashboard
-      navigate('/dashboard');
-    } else {
-      alert('Unexpected response from server.');
-      console.error('Unexpected login response:', response);
+        // Navigate to dashboard
+        navigate('/dashboard');
+      } else {
+        alert(data.detail || 'Login failed');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      alert('An error occurred while logging in.');
     }
-  } catch (err) {
-    // Show actual backend message
-    const msg = err.response?.data?.detail || 'Login failed';
-    console.error('Login error:', err);
-    alert(msg);
   }
-  }
-
-
 
   return (
     <div className="login-container">
       <h2>Login to LearnHub</h2>
-      <form onSubmit={handleSubmit} className="login-form">
+      <form onSubmit={handleSubmit} className="login-form" noValidate>
         <label>Email</label>
         <input
           type="email"
@@ -67,7 +63,7 @@ function Login() {
       </form>
 
       <p className="redirect-text">
-       Don't have an account? <Link to="/register">Register</Link>
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
     </div>
   );
