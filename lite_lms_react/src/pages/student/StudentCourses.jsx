@@ -24,7 +24,7 @@ const StudentCourses = () => {
       return;
     }
 
-    fetch(`http://127.0.0.1:8000/students/${studentId}/courses`, {
+    fetch(`https://lite-lms-7dkg.onrender.com/students/${studentId}/courses`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

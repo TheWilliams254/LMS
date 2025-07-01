@@ -6,7 +6,7 @@ const AvailableCourses = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/courses', {
+    fetch('https://lite-lms-7dkg.onrender.com/courses', {
       headers: {
         Authorization: `Bearer ${token}`,
       }
@@ -17,7 +17,7 @@ const AvailableCourses = () => {
   }, []);
 
   const handleEnroll = (courseId) => {
-    fetch(`http://127.0.0.1:8000/students/${user.id}/enroll`, {
+    fetch(`https://lite-lms-7dkg.onrender.com/students/${user.id}/enroll`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

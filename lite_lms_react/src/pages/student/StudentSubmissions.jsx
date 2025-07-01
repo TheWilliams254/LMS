@@ -10,7 +10,7 @@ const StudentSubmissions = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/assignments/${assignmentId}/my-submissions`, {
+    fetch(`https://lite-lms-7dkg.onrender.com/assignments/${assignmentId}/my-submissions`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
@@ -35,7 +35,7 @@ const StudentSubmissions = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch(`http://127.0.0.1:8000/assignments/${assignmentId}/submit`, {
+    fetch(`https://lite-lms-7dkg.onrender.com/assignments/${assignmentId}/submit`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

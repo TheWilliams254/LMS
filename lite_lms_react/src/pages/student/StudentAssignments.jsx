@@ -9,7 +9,7 @@ const StudentAssignments = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/courses/${courseId}/assignments`, {
+    fetch(`https://lite-lms-7dkg.onrender.com/courses/${courseId}/assignments`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

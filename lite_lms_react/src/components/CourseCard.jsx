@@ -12,7 +12,7 @@ const CourseCard = ({ course, onUpdate, onDelete }) => {
 
   const handleSave = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/courses/${course.id}`, {
+      const res = await fetch(`https://lite-lms-7dkg.onrender.com/courses/${course.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

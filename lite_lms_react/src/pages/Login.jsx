@@ -12,7 +12,7 @@ function Login() {
   e.preventDefault();
 
   try {
-    const response = await api.post('/login', {
+    const response = await fetch('https://lite-lms-7dkg.onrender.com/login', {
       email,
       password,
     });
